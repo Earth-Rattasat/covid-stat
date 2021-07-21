@@ -19,7 +19,7 @@ module.exports = {
     "max-len": ["error", { code: 100 }],
     "prefer-promise-reject-errors": ["off"],
     "react/jsx-filename-extension": ["off"],
-    "react/prop-types": ["warn"],
+    "react/prop-types": ["off"],
     "no-return-assign": ["off"],
     "prettier/prettier": ["error"],
     "react-hooks/rules-of-hooks": "error",
