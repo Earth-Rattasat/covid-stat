@@ -5,7 +5,7 @@ import { withNamespaces } from "react-i18next";
 import i18n from "./locales/i18n";
 import PropTypes from "prop-types";
 import { useObserver } from "mobx-react";
-import { StoreContext } from "./stroe/store";
+import { StoreContext } from "./store/store";
 
 const Home = () => (
   <div>
