@@ -1,4 +1,5 @@
 import React from "react";
+import OverviewStat from "../../components/templates/OverviewStat";
 import { Link } from "@reach/router";
 import Vaccine from "../../components/templates/vaccine";
 
@@ -54,24 +55,9 @@ const statListCenter = [
 ];
 
 const Home = () => {
-  const classes = useStyles();
   return (
-    <div className={classes.homepage}>
-      <div className={classes.overviewStat}>
-        <div className={classes.dashboardStat}>
-          <StatCardMain
-            label="ผู้ติดเชื้อสะสม"
-            stat="467,707"
-            labelChange="เพิ่มขึ้น"
-            statChange="14,575"
-          />
-          <div className={classes.dashboardStatUnder}>
-            {statListCenter.map((child, idx) => (
-              <StatCardCenter key={idx} {...child} />
-            ))}
-          </div>
-        </div>
-      </div>
+    <div>
+      <OverviewStat />
     </div>
   );
 };
