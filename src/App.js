@@ -14,18 +14,11 @@ function App(prop) {
   };
   return (
     <div className="App">
-      <header className="App-header">
-        <Router>
-          <Home path="/" />
-          <Dash path="dashboard/*" />
-          <NotFound t={t} default />
-        </Router>
-        <div>
-          <button onClick={() => changeLanguage("th")}>th</button>
-          <button onClick={() => changeLanguage("en")}>en</button>
-          <h1>{t("Hello")}</h1>
-        </div>
-      </header>
+      <Router>
+        <Home path="/" />
+        <Dash path="dashboard/*" />
+        <NotFound t={t} default />
+      </Router>
     </div>
   );
 }
