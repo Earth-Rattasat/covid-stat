@@ -9,6 +9,7 @@ const useStyles = makeStyles({
     background: "#000000",
     padding: "40px 60px",
     width: "calc(100vw - 120px)",
+    color: "white",
   },
   gridCol2: {
     display: "grid",
@@ -83,7 +84,7 @@ const Vaccine = () => {
           <div className={classes.gridRow2}>
             <span className={classes.textNormal}>ฉีดเพิ่มวันนี้</span>
             <span className={classes.textHeader} style={{ color: "#ea5771" }}>
-              +{vaccine?.all?.today}{" "}
+              {`+ ${vaccine?.all?.today}`}
               <span className={classes.textNormal}>โดส</span>
             </span>
           </div>
@@ -91,7 +92,7 @@ const Vaccine = () => {
           <div className={classes.gridRow2}>
             <span className={classes.textNormal}>สะสม</span>
             <span className={classes.textHeader} style={{ color: "#ea5771" }}>
-              {vaccine?.all?.total}{" "}
+              {`+ ${vaccine?.all?.total}`}
               <span className={classes.textNormal}>โดส</span>
             </span>
           </div>
@@ -119,11 +120,11 @@ const Vaccine = () => {
           <div className={classes.gridRow3}>
             <span className={classes.textNormal}>ฉีดเพิ่มวันนี้</span>
             <span className={classes.textHeader} style={{ color: "#F5C744" }}>
-              +{vaccine?.oneDose?.today}{" "}
+              + {vaccine?.oneDose?.today?.trim()}{" "}
               <span className={classes.textNormal}>คน</span>
             </span>
             <span className={classes.textHeader} style={{ color: "#F5C744" }}>
-              +{vaccine?.twoDose?.today}{" "}
+              + {vaccine?.twoDose?.today}{" "}
               <span className={classes.textNormal}>คน</span>
             </span>
           </div>
