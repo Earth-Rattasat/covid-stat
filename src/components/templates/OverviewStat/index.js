@@ -2,6 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/styles";
 import StatCardCenter from "../../organisms/StatCardCenter";
 import StatCardMain from "../../organisms/StatCardMain";
+import axios from "axios";
 
 const useStyles = makeStyles({
   homepage: {
@@ -66,20 +67,57 @@ const statListCenter = [
   },
 ];
 
-const OverviewStat = () => {
+const OverviewStat = ({ style }) => {
   const classes = useStyles();
+  const [statCardMainInfo, setStatCardMainInfo] = React.useState({});
+  const [statListState, setStatListState] = React.useState(statListCenter);
+  React.useEffect(() => {
+    const getAttibuteFromString = (srcString) => {
+      const labelMap = {
+        "(เพิ่ม": "เพิ่มขึ้น",
+        "(ลด": "ลดลง",
+        "(คงที่": "คงที่",
+      };
+      let strSplit = srcString.split(")")[0];
+      let labelChange = labelMap[strSplit.split(" ")[0]];
+      let statChange = Number(
+        strSplit
+          .split(" ")
+          .map((str) => parseInt(str))
+          .filter((number) => number)
+          .pop(),
+      ).toLocaleString("th-TH");
+      return { labelChange, statChange };
+    };
+
+    axios
+      .get("https://covid19-cdn.workpointnews.com/api/constants.json")
+      .then(({ data }) => {
+        setStatCardMainInfo({
+          label: "ผู้ติดเชื้อสะสม",
+          stat: Number(data["ผู้ติดเชื้อ"]).toLocaleString("th-TH"),
+          ...getAttibuteFromString(data["โน๊ตผู้ติดเชื้อ"]),
+        });
+
+        setStatListState(
+          statListCenter.map((statObject) => {
+            let { label } = statObject;
+            return {
+              ...statObject,
+              stat: Number(data[label]).toLocaleString("th-TH"),
+              ...getAttibuteFromString(data[`โน๊ตผู้${label}`]),
+            };
+          }),
+        );
+      });
+  }, []);
 
   return (
-    <div className={classes.overviewStat}>
+    <div className={classes.overviewStat} style={style}>
       <div className={classes.dashboardStat}>
-        <StatCardMain
-          label="ผู้ติดเชื้อสะสม"
-          stat="467,707"
-          labelChange="เพิ่มขึ้น"
-          statChange="14,575"
-        />
+        <StatCardMain {...statCardMainInfo} />
         <div className={classes.dashboardStatUnder}>
-          {statListCenter.map((child, idx) => (
+          {statListState.map((child, idx) => (
             <StatCardCenter key={idx} {...child} />
           ))}
         </div>
