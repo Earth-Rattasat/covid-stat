@@ -1,4 +1,4 @@
-# Develop Site On :  https://covid-stat-c5a39.web.app/
+# Develop Site On : https://covid-stat-c5a39.web.app/
 
 # Getting Started with Create React App
 

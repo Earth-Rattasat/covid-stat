@@ -7,9 +7,15 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
     background: "#000000",
-    padding: "40px 60px",
-    width: "calc(100vw - 120px)",
+    padding: "40px 300px",
+    width: "auto",
     color: "white",
+    ["@media (max-width:1440px)"]: {
+      padding: "40px 240px",
+    },
+    ["@media (max-width:1024px)"]: {
+      padding: "40px 140px",
+    },
   },
   gridCol2: {
     display: "grid",
@@ -52,10 +58,19 @@ const useStyles = makeStyles({
   textHeader: {
     fontSize: "2.7rem",
     fontWeight: "700",
+    ["@media (max-width:1440px)"]: {
+      fontSize: "1.7rem",
+    },
+    ["@media (max-width:1024px)"]: {
+      fontSize: "1rem",
+    },
   },
   textNormal: {
     fontSize: "1.5rem",
     fontWeight: "400",
+    ["@media (max-width:1440px)"]: {
+      fontSize: "1rem",
+    },
   },
 });
 
@@ -85,7 +100,7 @@ const Vaccine = () => {
             <span className={classes.textNormal}>ฉีดเพิ่มวันนี้</span>
             <span className={classes.textHeader} style={{ color: "#ea5771" }}>
               {`+ ${vaccine?.all?.today}`}
-              <span className={classes.textNormal}>โดส</span>
+              <span className={classes.textNormal}> โดส</span>
             </span>
           </div>
 
@@ -93,7 +108,7 @@ const Vaccine = () => {
             <span className={classes.textNormal}>สะสม</span>
             <span className={classes.textHeader} style={{ color: "#ea5771" }}>
               {`+ ${vaccine?.all?.total}`}
-              <span className={classes.textNormal}>โดส</span>
+              <span className={classes.textNormal}> โดส</span>
             </span>
           </div>
 
@@ -103,7 +118,7 @@ const Vaccine = () => {
 
       <div className={classes.flexRow + " " + classes.divider}>
         <div className={classes.dividerLine} />
-        <span style={{ width: "40%" }}>ประชากรทีได้รับวัคซีน</span>
+        <span style={{ width: "60%" }}>ประชากรทีได้รับวัคซีน</span>
         <div className={classes.dividerLine} />
       </div>
 
@@ -136,7 +151,7 @@ const Vaccine = () => {
               <span className={classes.textNormal}>คน</span>
             </span>
             <span className={classes.textHeader}>
-              {vaccine?.twoDose?.today}{" "}
+              {vaccine?.twoDose?.total}{" "}
               <span className={classes.textNormal}>คน</span>
             </span>
           </div>
