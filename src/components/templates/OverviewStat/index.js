@@ -35,6 +35,7 @@ const statListCenter = [
       borderRadius: "10px",
       marginRight: "10px",
     },
+    key: "Hospitalized",
     label: "กำลังรักษา",
     stat: "143,744",
     labelChange: "เพิ่มขึ้น",
@@ -46,6 +47,7 @@ const statListCenter = [
       background: "#039245",
       borderRadius: "10px",
     },
+    key: "Recovered",
     label: "หายแล้ว",
     stat: "320,152",
     labelChange: "เพิ่มขึ้น",
@@ -60,6 +62,7 @@ const statListCenter = [
       marginLeft: "10px",
       borderRadius: "10px",
     },
+    key: "Deaths",
     stat: "3,717",
     textColor: "white",
     labelChange: "เพิ่มขึ้น",
@@ -91,21 +94,24 @@ const OverviewStat = ({ style }) => {
     };
 
     axios
-      .get("https://covid19-cdn.workpointnews.com/api/constants.json")
+      .get("https://static.easysunday.com/covid-19/getTodayCases.json")
       .then(({ data }) => {
+        console.log(data);
         setStatCardMainInfo({
           label: "ผู้ติดเชื้อสะสม",
-          stat: Number(data["ผู้ติดเชื้อ"]).toLocaleString("th-TH"),
-          ...getAttibuteFromString(data["โน๊ตผู้ติดเชื้อ"]),
+          stat: Number(data.cases).toLocaleString("th-TH"),
+          labelChange: "เพิ่มขึ้น",
+          statChange: Number(data.todayCases).toLocaleString("th-TH"),
         });
 
         setStatListState(
           statListCenter.map((statObject) => {
-            let { label } = statObject;
+            let { key } = statObject;
             return {
               ...statObject,
-              stat: Number(data[label]).toLocaleString("th-TH"),
-              ...getAttibuteFromString(data[`โน๊ตผู้${label}`]),
+              stat: Number(data[key]).toLocaleString("th-TH"),
+              labelChange: "เพิ่มขึ้น",
+              statChange: Number(data[`New${key}`]).toLocaleString("th-TH"),
             };
           }),
         );
