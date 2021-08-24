@@ -100,8 +100,8 @@ const OverviewStat = ({ style }) => {
         setStatCardMainInfo({
           label: "ผู้ติดเชื้อสะสม",
           stat: Number(data.cases).toLocaleString("th-TH"),
-          labelChange: "เพิ่มขึ้น",
-          statChange: Number(data.todayCases).toLocaleString("th-TH"),
+          labelChange: Number(data.todayCases) < 0 ? "ลดลง" : "เพิ่มขึ้น",
+          statChange: Number(Math.abs(data.todayCases)).toLocaleString("th-TH"),
         });
 
         setStatListState(
@@ -110,8 +110,10 @@ const OverviewStat = ({ style }) => {
             return {
               ...statObject,
               stat: Number(data[key]).toLocaleString("th-TH"),
-              labelChange: "เพิ่มขึ้น",
-              statChange: Number(data[`New${key}`]).toLocaleString("th-TH"),
+              labelChange: Number(data[`New${key}`]) < 0 ? "ลดลง" : "เพิ่มขึ้น",
+              statChange: Number(Math.abs(data[`New${key}`])).toLocaleString(
+                "th-TH",
+              ),
             };
           }),
         );
